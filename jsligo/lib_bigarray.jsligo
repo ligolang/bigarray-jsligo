@@ -19,7 +19,7 @@ export let construct : ((p: [nat, _kind]) => big_array<option<_kind>>) = ([size,
 };
 
 //
-// Last 
+// Last retrieves the last element 
 //
 export let last : ((p: big_array<_kind>) => _kind) = (lst1 : big_array<_kind>) : _kind => {
   let last_rec : ((pp: big_array<_kind>) => _kind) = (lst1 : big_array<_kind>) : _kind => {
@@ -119,7 +119,7 @@ export let insert :  ((p: [_kind, nat, big_array<_kind>]) => big_array<_kind>) =
 };
 
 //
-// Drop
+// Drop the element at a specific position
 //
 export let drop : ((p: [nat, big_array<_kind>]) => big_array<_kind>) = ([position, lst1] : [nat, big_array<_kind>]) : big_array<_kind> => {
   let drop_rec : ((p: [nat, big_array<_kind>, big_array<_kind>]) => big_array<_kind>) = ([position, lst1, lst2] : [nat, big_array<_kind>, big_array<_kind>]) : big_array<_kind> =>
@@ -138,7 +138,7 @@ export let drop : ((p: [nat, big_array<_kind>]) => big_array<_kind>) = ([positio
 };
 
 //
-// take
+// take retrieves first elements
 //
 export let take : ((p: [nat, big_array<_kind>]) => big_array<_kind>) = ([i, lst] : [nat, big_array<_kind>]) : big_array<_kind> => {
   let take_rec : ((p: [nat, big_array<_kind>, big_array<_kind>]) => big_array<_kind>) = ([i, lst, res] : [nat, big_array<_kind>, big_array<_kind>]) : big_array<_kind> => {
@@ -155,7 +155,7 @@ export let take : ((p: [nat, big_array<_kind>]) => big_array<_kind>) = ([i, lst]
 };
 
 //
-// Slice
+// Slice extracts a sub big array at a specifc position (and a specific length)
 //
 export let slice : ((p: [nat, nat, big_array<_kind>]) => big_array<_kind>) = ([i, k, lst] : [nat, nat, big_array<_kind>]) : big_array<_kind> => {
   let slice_rec : ((pp: [nat, nat, big_array<_kind>]) => big_array<_kind>) = ([i, k, lst] : [nat, nat, big_array<_kind>]) : big_array<_kind> => {
@@ -173,7 +173,7 @@ export let slice : ((p: [nat, nat, big_array<_kind>]) => big_array<_kind>) = ([i
 };
 
 //
-// Split
+// Split a given big array at a specific position
 //
 export let split : ((p: [nat, big_array<_kind>]) => [big_array<_kind>, big_array<_kind>]) = ([i, lst] : [nat, big_array<_kind>]) : [big_array<_kind>, big_array<_kind>] => {
   let split_rec : ((p: [nat, big_array<_kind>, big_array<_kind>]) => [big_array<_kind>, big_array<_kind>]) = ([i, lst1, lst2]: [nat, big_array<_kind>, big_array<_kind>]) : [big_array<_kind>, big_array<_kind>] => {
@@ -221,7 +221,7 @@ export let equal : ((p: [_kind, _kind]) => bool) = ([val_a, val_b]: [_kind, _kin
 };
 
 //
-// Remove
+// Remove all occurences of a given element
 //
 export let remove : ((p: [_kind, big_array<_kind>]) => big_array<_kind>) = ([element, lst] : [_kind, big_array<_kind>]) : big_array<_kind> => {
   let remove_rec : ((pp: [_kind, big_array<_kind>, big_array<_kind>]) => big_array<_kind>) = ([element, lst, res] : [_kind, big_array<_kind>, big_array<_kind>]) : big_array<_kind> => {

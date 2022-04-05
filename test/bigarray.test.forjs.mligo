@@ -1,4 +1,4 @@
-#import "../jsligo/contract.jsligo" "Bigarray"
+#import "../jsligo/lib_bigarray.jsligo" "Bigarray"
 
 type 'a big_array = 'a list
 
