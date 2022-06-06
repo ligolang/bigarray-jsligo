@@ -3,16 +3,16 @@
 type big_array<a> = list<a>;
 
 // We need to create a generic entrypoint main that do nothing for compilation purpose
-let main = ([_action, store] : [bytes, bytes]) : [big_array<operation>, bytes] => { return [(list([]) as big_array<operation>), store]; };
+const main = ([_action, store] : [bytes, bytes]) : [big_array<operation>, bytes] => { return [(list([]) as big_array<operation>), store]; };
 
 
 //
 //  Basic Constructor
 //
-let _test_construct_basic_array_should_work = () : string => {
+const _test_construct_basic_array_should_work = () : string => {
   //Given
   let size : nat = 3 as nat;
-  let intended_result : list<option<nat>> = list([(None() as option<nat>) , (None() as option<nat>) , (None() as option<nat>) ]);
+  let _intended_result : list<option<nat>> = list([(None() as option<nat>) , (None() as option<nat>) , (None() as option<nat>) ]);
   //when
   let result = Bigarray.construct(size,(0 as nat));
   //Then
@@ -22,7 +22,7 @@ let _test_construct_basic_array_should_work = () : string => {
 //
 //  Get the last element
 //
-let _test_last_element_with_string_should_work = () : string => {
+const _test_last_element_with_string_should_work = () : string => {
   //Given
   let lst1 : big_array<string> = list(["one", "two", "three", "four"]);
   let intended_result : string = "four";
@@ -35,7 +35,7 @@ let _test_last_element_with_string_should_work = () : string => {
 //
 //  Reverse
 //
-let _test_reversing_with_int_should_work = () : string => {
+const _test_reversing_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 2, 3]);
   let intended_result : big_array<int> = list([3, 2, 1]);
@@ -45,7 +45,7 @@ let _test_reversing_with_int_should_work = () : string => {
   let _ = assert (result == intended_result); "OK"
 };
 
-let _test_reversing_with_string_should_work = () : string => {
+const _test_reversing_with_string_should_work = () : string => {
   //Given
   let lst1 : big_array<string> = list(["one", "two", "three"]);
   let intended_result : big_array<string> = list(["three", "two", "one"]);
@@ -57,7 +57,7 @@ let _test_reversing_with_string_should_work = () : string => {
 //
 //  Concatenation
 //
-let _test_concatenation_with_int_should_work = () : string => {
+const _test_concatenation_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 2, 3]);
   let lst2 : big_array<int> = list([4, 5]);
@@ -68,7 +68,7 @@ let _test_concatenation_with_int_should_work = () : string => {
   let _ = assert (result == intended_result); "OK"
 };
 
-let _test_concatenation_with_string_should_work = () : string => {
+const _test_concatenation_with_string_should_work = () : string => {
   //Given
   let lst1 : big_array<string> = list(["one", "two", "three"]);
   let lst2 : big_array<string> = list(["four", "five"]);
@@ -82,7 +82,7 @@ let _test_concatenation_with_string_should_work = () : string => {
 //
 //  Get one element
 //
-let _test_get_element_with_int_should_work = () : string => {
+const _test_get_element_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 2, 3, 4]);
   let position : nat = 1 as nat;
@@ -93,7 +93,7 @@ let _test_get_element_with_int_should_work = () : string => {
   let _ = assert (result == intended_result); "OK"
 };
 
-let _test_get_element_with_string_should_work = () : string => {
+const _test_get_element_with_string_should_work = () : string => {
   //Given
   let lst1 : big_array<string> = list(["one", "two", "three", "four"]);
   let position : nat = 1 as nat;
@@ -107,7 +107,7 @@ let _test_get_element_with_string_should_work = () : string => {
 //
 //  Set one element
 //
-let _test_set_element_with_int_should_work = () : string => {
+const _test_set_element_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 2, 3, 4, 5]);
   let element : int = 7;
@@ -119,7 +119,7 @@ let _test_set_element_with_int_should_work = () : string => {
   let _ = assert (result == intended_result); "OK"
 };
 
-let _test_set_element_with_string_should_work = () : string => {
+const _test_set_element_with_string_should_work = () : string => {
   //Given
   let lst1 : big_array<string> = list(["one", "two", "three", "four", "five"]);
   let element : string = "seven";
@@ -134,7 +134,7 @@ let _test_set_element_with_string_should_work = () : string => {
 //
 //  Insert one element
 //
-let _test_insertion_with_int_should_work = () : string => {
+const _test_insertion_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 3, 4]);
   let element : int = 2;
@@ -146,7 +146,7 @@ let _test_insertion_with_int_should_work = () : string => {
   let _ = assert (result == intended_result); "OK"
 };
 
-let _test_insertion_with_string_should_work = () : string => {
+const _test_insertion_with_string_should_work = () : string => {
   //Given
   let lst1 : big_array<string> = list(["one", "three", "four"]);
   let element : string = "two";
@@ -161,7 +161,7 @@ let _test_insertion_with_string_should_work = () : string => {
 //
 //  Drop one element
 //
-let _test_drop_with_int_should_work = () : string => {
+const _test_drop_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 2, 3, 4]);
   let position : nat = 2 as nat;
@@ -172,7 +172,7 @@ let _test_drop_with_int_should_work = () : string => {
   let _ = assert (result == intended_result); "OK"
 };
 
-let _test_drop_with_string_should_work = () : string => {
+const _test_drop_with_string_should_work = () : string => {
   //Given
   let lst1 : big_array<string> = list(["one", "two", "three", "four"]);
   let position : nat = 3 as nat;
@@ -186,7 +186,7 @@ let _test_drop_with_string_should_work = () : string => {
 //
 //  Slice
 //
-let _test_slice_with_int_should_work = () : string => {
+const _test_slice_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 2, 3, 4]);
   let i : nat = 1 as nat;
@@ -198,7 +198,7 @@ let _test_slice_with_int_should_work = () : string => {
   let _ = assert (result == intended_result); "OK"
 };
 
-let _test_slice_with_string_should_work = () : string => {
+const _test_slice_with_string_should_work = () : string => {
   //Given
   let lst1 : big_array<string> = list(["one", "two", "three", "four"]);
   let i : nat = 0 as nat;
@@ -213,7 +213,7 @@ let _test_slice_with_string_should_work = () : string => {
 //
 //  Split
 //
-let _test_split_with_int_should_work = () : string => {
+const _test_split_with_int_should_work = () : string => {
   //Given
   let lst : big_array<int> = list([1, 2, 3, 4]);
   let i : nat = 1 as nat;
@@ -228,7 +228,7 @@ let _test_split_with_int_should_work = () : string => {
 //
 //  Rotate
 //
-let _test_rotate_with_int_should_work = () : string => {
+const _test_rotate_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 2, 3, 4]);
   let i : nat = 1 as nat;
@@ -242,7 +242,7 @@ let _test_rotate_with_int_should_work = () : string => {
 //
 //  Remove
 //
-let _test_remove_with_int_should_work = () : string => {
+const _test_remove_with_int_should_work = () : string => {
   //Given
   let lst1 : big_array<int> = list([1, 2, 3, 2]);
   let elem : int = 2;

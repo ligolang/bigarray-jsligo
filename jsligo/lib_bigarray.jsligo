@@ -7,7 +7,7 @@ type big_array<a> = list<a>;
 //
 // Empty constructor 
 //
-export let construct : <T>((p: [nat, T]) => big_array<option<T>>) = ([size, wanted_type] : [nat, T]) : big_array<option<T>> => {
+export const construct : <T>((p: [nat, T]) => big_array<option<T>>) = ([size, wanted_type] : [nat, T]) : big_array<option<T>> => {
   let construct_rec : <T>((pp: [nat, T, big_array<option<T>>]) => big_array<option<T>>) = ([size, wanted_type, res] : [nat, T, big_array<option<T>>]) : big_array<option<T>> => {
     if (size == (0 as nat)) { 
       return res;
@@ -21,7 +21,7 @@ export let construct : <T>((p: [nat, T]) => big_array<option<T>>) = ([size, want
 //
 // Last retrieves the last element 
 //
-export let last : <T>((p: big_array<T>) => T) = (lst1 : big_array<T>) : T => {
+export const last : <T>((p: big_array<T>) => T) = (lst1 : big_array<T>) : T => {
   let last_rec : <T>((pp: big_array<T>) => T) = (lst1 : big_array<T>) : T => {
     match(lst1, list([ 
     ( [] : big_array<T>) => failwith("The big_array is empty"),
@@ -39,7 +39,7 @@ export let last : <T>((p: big_array<T>) => T) = (lst1 : big_array<T>) : T => {
 //
 // Reversing
 //
-export let reverse : <T>((p: big_array<T>) => big_array<T>) = (lst1 : big_array<T>) : big_array<T> => {
+export const reverse : <T>((p: big_array<T>) => big_array<T>) = (lst1 : big_array<T>) : big_array<T> => {
   let reverse_rec : <T>((pp: [big_array<T>, big_array<T>]) => big_array<T>) = ([lst1, res] : [big_array<T>, big_array<T>]) : big_array<T> =>
     match(lst1, list([
     ( [] : big_array<T>) => res,
@@ -51,7 +51,7 @@ export let reverse : <T>((p: big_array<T>) => big_array<T>) = (lst1 : big_array<
 //
 // Concatenation
 //
-export let concat : <T>((p: [big_array<T>, big_array<T>]) => big_array<T>) = ([lst1, lst2] : [big_array<T>, big_array<T>]) : big_array<T> => {
+export const concat : <T>((p: [big_array<T>, big_array<T>]) => big_array<T>) = ([lst1, lst2] : [big_array<T>, big_array<T>]) : big_array<T> => {
   let concat_rec : <T>((pp: [big_array<T>, big_array<T>]) => big_array<T>) = ([lst1r, lst2] : [big_array<T>, big_array<T>]) : big_array<T> =>
     match(lst1r, list([
     ( [] : big_array<T>) => lst2,
@@ -64,7 +64,7 @@ export let concat : <T>((p: [big_array<T>, big_array<T>]) => big_array<T>) = ([l
 //
 // Get an element by his number position
 //
-export let find : <T>((p: [nat, big_array<T>]) => T) = ([position, lst1] : [nat, big_array<T>]) : T => {
+export const find : <T>((p: [nat, big_array<T>]) => T) = ([position, lst1] : [nat, big_array<T>]) : T => {
   let get : <T>((p: [nat, big_array<T>]) => T) = ([position, lst1] : [nat, big_array<T>]) : T => {
     match(lst1, list([
     ( [] : big_array<T>) => failwith("Position is highter than big_array length"),
@@ -80,7 +80,7 @@ export let find : <T>((p: [nat, big_array<T>]) => T) = ([position, lst1] : [nat,
 //
 // Set an element by his number position
 //
-export let set : <T>((p: [T, nat, big_array<T>]) => big_array<T>) = ([element, position, lst1] : [T, nat, big_array<T>]) : big_array<T> => {
+export const set : <T>((p: [T, nat, big_array<T>]) => big_array<T>) = ([element, position, lst1] : [T, nat, big_array<T>]) : big_array<T> => {
   let set_ : <T>((p: [T, nat, big_array<T>, big_array<T>]) => big_array<T>) = ([element, position, lst1, res] : [T, nat, big_array<T>, big_array<T>]) : big_array<T> =>
     match(lst1, list([
     ( [] : big_array<T>) => failwith("Position is highter than big_array length"),
@@ -100,7 +100,7 @@ export let set : <T>((p: [T, nat, big_array<T>]) => big_array<T>) = ([element, p
 //
 // Insertion
 //
-export let insert :  <T>((p: [T, nat, big_array<T>]) => big_array<T>) = ([element, position, lst1] : [T, nat, big_array<T>]) : big_array<T> => {
+export const insert :  <T>((p: [T, nat, big_array<T>]) => big_array<T>) = ([element, position, lst1] : [T, nat, big_array<T>]) : big_array<T> => {
   let insert_rec : <T>((p: [T, nat, big_array<T>, big_array<T>]) => big_array<T>) = ([element, position, lst1, lst2] : [T, nat, big_array<T>, big_array<T>]) : big_array<T> =>
     match(lst1, list([ 
     ( [] : big_array<T>) => failwith("Position is highter than big_array length"),
@@ -121,7 +121,7 @@ export let insert :  <T>((p: [T, nat, big_array<T>]) => big_array<T>) = ([elemen
 //
 // Drop the element at a specific position
 //
-export let drop : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([position, lst1] : [nat, big_array<T>]) : big_array<T> => {
+export const drop : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([position, lst1] : [nat, big_array<T>]) : big_array<T> => {
   let drop_rec : <T>((p: [nat, big_array<T>, big_array<T>]) => big_array<T>) = ([position, lst1, lst2] : [nat, big_array<T>, big_array<T>]) : big_array<T> =>
     match(lst1, list([ 
     ( [] : big_array<T>) => failwith("Position is highter than big_array length"),
@@ -140,7 +140,7 @@ export let drop : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([position, ls
 //
 // take retrieves first elements
 //
-export let take : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([i, lst] : [nat, big_array<T>]) : big_array<T> => {
+export const take : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([i, lst] : [nat, big_array<T>]) : big_array<T> => {
   let take_rec : <T>((p: [nat, big_array<T>, big_array<T>]) => big_array<T>) = ([i, lst, res] : [nat, big_array<T>, big_array<T>]) : big_array<T> => {
     if (i == (0 as nat) ) {
       return reverse(res);
@@ -157,7 +157,7 @@ export let take : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([i, lst] : [n
 //
 // Slice extracts a sub big array at a specifc position (and a specific length)
 //
-export let slice : <T>((p: [nat, nat, big_array<T>]) => big_array<T>) = ([i, k, lst] : [nat, nat, big_array<T>]) : big_array<T> => {
+export const slice : <T>((p: [nat, nat, big_array<T>]) => big_array<T>) = ([i, k, lst] : [nat, nat, big_array<T>]) : big_array<T> => {
   let slice_rec : <T>((pp: [nat, nat, big_array<T>]) => big_array<T>) = ([i, k, lst] : [nat, nat, big_array<T>]) : big_array<T> => {
     if (i == (0 as nat) ) { 
       let extract : nat = abs(k-i);
@@ -165,7 +165,7 @@ export let slice : <T>((p: [nat, nat, big_array<T>]) => big_array<T>) = ([i, k, 
     } else {
       return match(lst, list([
       ( [] : big_array<T>) => list([]),
-      ( [hd1, ...tl1] : big_array<T>) => slice_rec( [abs(i-(1 as nat)), k, tl1])
+      ( [_hd1, ...tl1] : big_array<T>) => slice_rec( [abs(i-(1 as nat)), k, tl1])
       ]));
     }
   };
@@ -175,7 +175,7 @@ export let slice : <T>((p: [nat, nat, big_array<T>]) => big_array<T>) = ([i, k, 
 //
 // Split a given big array at a specific position
 //
-export let split : <T>((p: [nat, big_array<T>]) => [big_array<T>, big_array<T>]) = ([i, lst] : [nat, big_array<T>]) : [big_array<T>, big_array<T>] => {
+export const split : <T>((p: [nat, big_array<T>]) => [big_array<T>, big_array<T>]) = ([i, lst] : [nat, big_array<T>]) : [big_array<T>, big_array<T>] => {
   let split_rec : <T>((p: [nat, big_array<T>, big_array<T>]) => [big_array<T>, big_array<T>]) = ([i, lst1, lst2]: [nat, big_array<T>, big_array<T>]) : [big_array<T>, big_array<T>] => {
     if (i == (0 as nat) ) { 
       let lstr = reverse(lst2);
@@ -198,7 +198,7 @@ export let split : <T>((p: [nat, big_array<T>]) => [big_array<T>, big_array<T>])
 //
 // Rotate to the left
 //
-export let rotate : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([i, lst] : [nat, big_array<T>]) : big_array<T> => {
+export const rotate : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([i, lst] : [nat, big_array<T>]) : big_array<T> => {
   let rotate_rec : <T>((pp: [nat, big_array<T>, big_array<T>]) => big_array<T>) = ([i, lst, res] : [nat, big_array<T>, big_array<T>]) : big_array<T> => {
     if (i == (0 as nat) ) { 
       let lstr = reverse(res);
@@ -216,14 +216,14 @@ export let rotate : <T>((p: [nat, big_array<T>]) => big_array<T>) = ([i, lst] : 
 // equal (bytes version)
 // WARNING : Two lambda can be packed equal whereas they are different
 //
-export let equal : <T>((p: [T, T]) => bool) = ([val_a, val_b]: [T, T]) : bool => {
+export const equal : <T>((p: [T, T]) => bool) = ([val_a, val_b]: [T, T]) : bool => {
     (Bytes.pack(val_a)) == (Bytes.pack(val_b))
 };
 
 //
 // Remove all occurences of a given element
 //
-export let remove : <T>((p: [T, big_array<T>]) => big_array<T>) = ([element, lst] : [T, big_array<T>]) : big_array<T> => {
+export const remove : <T>((p: [T, big_array<T>]) => big_array<T>) = ([element, lst] : [T, big_array<T>]) : big_array<T> => {
   let remove_rec : <T>((pp: [T, big_array<T>, big_array<T>]) => big_array<T>) = ([element, lst, res] : [T, big_array<T>, big_array<T>]) : big_array<T> => {
     return match(lst, list([
       ( [] : big_array<T>) => { return reverse(res) },
