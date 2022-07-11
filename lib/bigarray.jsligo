@@ -1,0 +1,145 @@
+const fill : <T>((n: int, x: T) => list<T>) = (n: int, x: T) => {
+  const aux = (n: int, acc: list<T>) : list<T> => {
+    if (n == 0) { return acc };
+    return aux(n - 1, list([x, ...acc]));
+  };
+
+  aux(n, list([]) as list<T>);
+};
+
+const last_exn : <T>((xs: list<T>) => T) = xs =>
+  match(xs, list([
+    ([]: list<T>) => failwith("Empty list"),
+    ([hd, ...tl]: list<T>) => {
+      if (List.length(tl) > (0 as nat)) {
+        return last_exn(tl);
+      };
+      return hd;
+    }
+  ]));
+
+const reverse : <T>((xs: list<T>) => list<T>) = xs => {
+  const f = (ys: list<T>, x: T) : list<T> => list([x, ...ys]);
+  return List.fold_left(f, list([]) as list<T>, xs)
+};
+
+const concat : <T>((xs: list<T>, ys: list<T>) => list<T>) = (xs: list<T>, ys: list<T>) => {
+  const f = (x: T, ys: list<T>) : list<T> => list([x, ...ys]);
+  return List.fold_right(f, xs, ys);
+};
+
+const get_exn : <T>((xs : list<T>, n : int) => T) = (xs: list<T>, n: int) => {
+  const aux = (remaining: list<T>, cur: int) : T =>
+    match(remaining, list([
+      ([]: list<T>) => failwith("Not found in list"),
+      ([hd, ...tl]: list<T>) => {
+        if (cur == n) {
+          return hd;
+        };
+        return aux(tl, cur + 1);
+      }
+    ]));
+
+  aux(xs, 0);
+};
+
+const set_exn : <T>((xs : list<T>, n : int, x: T) => list<T>) = (xs: list<T>, n: int, x: T) => {
+  const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> =>
+    match(xs, list([
+      ([]: list<T>) => failwith("Not found in list"),
+      ([hd, ...tl]: list<T>) => {
+        if (n == 0) {
+          const ys = reverse(list([x, ...acc]));
+          return concat(ys, tl)
+        };
+        return aux(tl, n - 1, list([hd, ...acc]));
+      }
+    ]));
+
+  aux(xs, n, list([]) as list<T>);
+};
+
+const insert_exn : <T>((xs : list<T>, n : int, x: T) => list<T>) = (xs: list<T>, n: int, x: T) => {
+  const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> =>
+    match(xs, list([
+      ([]: list<T>) => failwith("Not found in list"),
+      ([hd, ...tl]: list<T>) => {
+        if (n == 0) {
+          const ys = reverse(list([x, ...acc]));
+          return concat(ys, xs);
+        };
+
+        aux(tl, n - 1, list([hd, ...acc]));
+      }
+    ]));
+
+  aux(xs, n, list([]) as list<T>);
+};
+
+const remove_exn : <T>((xs : list<T>, n : int) => list<T>) = (xs: list<T>, n: int) => {
+  const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> =>
+    match(xs, list([
+      ([]: list<T>) => failwith("Not found in list"),
+      ([hd, ...tl]: list<T>) => {
+        if (n == 0) {
+          const ys = reverse(acc);
+          return concat(ys, tl);
+        };
+
+        aux(tl, n - 1, list([hd, ...acc]));
+      }
+    ]));
+
+  aux(xs, n, list([]) as list<T>);
+};
+
+const drop_exn : <T>((xs : list<T>, n: int) => list<T>) = (xs: list<T>, n: int) =>
+  match(xs, list([
+    ([]: list<T>) => failwith("Not found in list"),
+    ([_, ...tl]: list<T>) => {
+      if (n == 0) {
+        return xs;
+      };
+
+      drop_exn(tl, (n - 1));
+    }
+  ]));
+
+const take : <T>((xs : list<T>, n: int) => list<T>) = (xs: list<T>, n: int) =>
+{
+  const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> => {
+    if (n == 0) { return reverse(acc); };
+
+    match(xs, list([
+      ([]: list<T>) => reverse(acc),
+      ([hd, ...tl]: list<T>) => aux(tl, n - 1, list([hd, ...acc]))
+    ]));
+  };
+
+  aux(xs, n, list([]) as list<T>);
+};
+
+const slice : <T>((xs : list<T>, start: int, range: int) => list<T>) =
+  (xs: list<T>, start: int, range: int) =>
+    take(drop_exn(xs, start), range)
+
+const split : <T>((xs : list<T>, n: int) => [list<T>, list<T>]) =
+  (xs: list<T>, n: int) =>
+    [take(xs, n), drop_exn(xs, n)]
+
+const rotate : <T>((xs : list<T>, n: int) => list<T>) = (xs: list<T>, n: int) =>
+{
+  const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> => {
+    if (n == 0) {
+      const ys = reverse(acc);
+      return concat(xs, ys);
+    };
+
+    match(xs, list([
+      ([]: list<T>) => reverse(acc),
+      ([hd, ...tl]: list<T>) => aux(tl, n - 1, list([hd, ...acc]))
+    ]));
+  };
+
+  aux(xs, n, list([]) as list<T>);
+};
