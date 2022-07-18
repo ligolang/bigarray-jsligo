@@ -1,0 +1,126 @@
+#import "../lib/bigarray.jsligo" "Bigarray"
+
+const test_fill = (() => {
+  assert(Bigarray.fill(4, 10) == list([10,10,10,10]));
+  assert(Bigarray.fill(4, "foo") == list(["foo","foo","foo","foo"]));
+})();
+
+const test_last_exn = (() => {
+  assert(Bigarray.last_exn(list([1,2,3])) == (3 as int));
+  assert(Bigarray.last_exn(list(["foo","bar","baz"])) == "baz");
+})();
+
+const test_reverse = (() => {
+  assert(Bigarray.reverse(list([1,2,3])) == list([3,2,1]));
+  assert(Bigarray.reverse(list(["foo", "bar", "baz"])) == list(["baz", "bar", "foo"]));
+})();
+
+const test_concat = (() => {
+  assert(Bigarray.concat(
+    list([1,2,3]),
+    list([4,5,6])) == list([1,2,3,4,5,6]));
+
+  assert(Bigarray.concat(
+    list(["foo","bar","baz"]),
+    list(["qux","quux","corge"])) == list(["foo","bar","baz","qux","quux","corge"]));
+})();
+
+const test_test_get_exn = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.get_exn(xs, 0) == 1);
+  assert(Bigarray.get_exn(xs, 2) == 3);
+  assert(Bigarray.get_exn(xs, 5) == 6);
+  assert(Bigarray.get_exn(ys, 0) == "foo");
+  assert(Bigarray.get_exn(ys, 2) == "baz");
+  assert(Bigarray.get_exn(ys, 5) == "corge");
+})();
+
+const test_set_exn = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.set_exn(xs, 0, 0) == list([0,2,3,4,5,6,7]));
+  assert(Bigarray.set_exn(xs, 2, 33) == list([1,2,33,4,5,6,7]));
+  assert(Bigarray.set_exn(xs, 6, 77) == list([1,2,3,4,5,6,77]));
+  assert(Bigarray.set_exn(ys, 0, "garply") == list(["garply","bar","baz","qux","quux","corge","grault"]));
+  assert(Bigarray.set_exn(ys, 2, "waldo") == list(["foo","bar","waldo","qux","quux","corge","grault"]));
+  assert(Bigarray.set_exn(ys, 6, "fred") == list(["foo","bar","baz","qux","quux","corge","fred"]));
+})();
+
+const test_insert_exn = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.insert_exn(xs, 0, 0) == list([0,1,2,3,4,5,6,7]));
+  assert(Bigarray.insert_exn(xs, 2, 3) == list([1,2,3,3,4,5,6,7]));
+  assert(Bigarray.insert_exn(xs, 6, 8) == list([1,2,3,4,5,6,8,7]));
+  assert(Bigarray.insert_exn(ys, 0, "garply") == list(["garply","foo","bar","baz","qux","quux","corge","grault"]));
+  assert(Bigarray.insert_exn(ys, 2, "waldo") == list(["foo","bar","waldo","baz","qux","quux","corge","grault"]));
+  assert(Bigarray.insert_exn(ys, 6, "fred") == list(["foo","bar","baz","qux","quux","corge","fred","grault"]));
+})();
+
+const test_remove_exn = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.remove_exn(xs, 0) == list([2,3,4,5,6,7]));
+  assert(Bigarray.remove_exn(xs, 2) == list([1,2,4,5,6,7]));
+  assert(Bigarray.remove_exn(xs, 6) == list([1,2,3,4,5,6]));
+  assert(Bigarray.remove_exn(ys, 0) == list(["bar","baz","qux","quux","corge","grault"]));
+  assert(Bigarray.remove_exn(ys, 2) == list(["foo","bar","qux","quux","corge","grault"]));
+  assert(Bigarray.remove_exn(ys, 6) == list(["foo","bar","baz","qux","quux","corge"]));
+})();
+
+const test_drop_exn = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.drop_exn(xs, 0) == list([1,2,3,4,5,6,7]));
+  assert(Bigarray.drop_exn(xs, 2) == list([3,4,5,6,7]));
+  assert(Bigarray.drop_exn(xs, 6) == list([7]));
+  assert(Bigarray.drop_exn(ys, 0) == list(["foo", "bar","baz","qux","quux","corge","grault"]));
+  assert(Bigarray.drop_exn(ys, 2) == list(["baz","qux","quux","corge","grault"]));
+  assert(Bigarray.drop_exn(ys, 6) == list(["grault"]));
+})();
+
+const test_take = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.take(xs, 0) == (list([]) as list<int>));
+  assert(Bigarray.take(xs, 2) == list([1,2]));
+  assert(Bigarray.take(xs, 6) == list([1,2,3,4,5,6]));
+  assert(Bigarray.take(ys, 0) == (list([]) as list<string>));
+  assert(Bigarray.take(ys, 2) == list(["foo","bar"]));
+  assert(Bigarray.take(ys, 6) == list(["foo", "bar","baz","qux","quux","corge"]));
+})();
+
+const test_slice = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.slice(xs, 0, 0) == (list([]) as list<int>));
+  assert(Bigarray.slice(xs, 0, 2) == list([1,2]));
+  assert(Bigarray.slice(xs, 3, 2) == list([4,5]));
+  assert(Bigarray.slice(xs, 6, 1) == list([7]));
+  assert(Bigarray.slice(ys, 0, 0) == (list([]) as list<string>));
+  assert(Bigarray.slice(ys, 0, 2) == list(["foo","bar"]));
+  assert(Bigarray.slice(ys, 3, 2) == list(["qux","quux"]));
+  assert(Bigarray.slice(ys, 6, 1) == list(["grault"]));
+})();
+
+const test_split = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.split(xs, 0) == [list([]) as list<int>, list([1,2,3,4,5,6,7])]);
+  assert(Bigarray.split(xs, 3) == [list([1,2,3]),list([4,5,6,7])]);
+  assert(Bigarray.split(xs, 5) == [list([1,2,3,4,5]),list([6,7])]);
+  assert(Bigarray.split(ys, 0) == [list([]) as list<string>, list(["foo", "bar","baz","qux","quux","corge","grault"])]);
+  assert(Bigarray.split(ys, 3) == [list(["foo", "bar","baz"]) as list<string>, list(["qux","quux","corge","grault"])]);
+  assert(Bigarray.split(ys, 5) == [list(["foo", "bar","baz","qux","quux"]) as list<string>, list(["corge","grault"])]);
+})();
+
+const test_rotate = (() => {
+  const xs = list([1,2,3,4,5,6,7]);
+  const ys = list(["foo","bar","baz","qux","quux","corge","grault"]);
+  assert(Bigarray.rotate(xs, 0) == xs);
+  assert(Bigarray.rotate(xs, 1) == list([2,3,4,5,6,7,1]));
+  assert(Bigarray.rotate(xs, 4) == list([5,6,7,1,2,3,4]));
+  assert(Bigarray.rotate(ys, 1) == list(["bar","baz","qux","quux","corge","grault","foo"]));
+  assert(Bigarray.rotate(ys, 4) == list(["quux","corge","grault","foo","bar","baz","qux"]));
+})();
