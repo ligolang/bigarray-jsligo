@@ -15,3 +15,7 @@ see [bigarray.test.jsligo](./test/bigarray.test.jsligo) for usage.
 
 Just run `make` or `make test` to run the tests
 
+You can also override `make` parameters by running :
+```sh
+make test ligo_compiler=<LIGO_EXECUTABLE> PROTOCOL_OPT="--protocol <PROTOCOL>"
+```
