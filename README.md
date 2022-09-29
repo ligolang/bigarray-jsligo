@@ -8,8 +8,29 @@ Like lists, `Bigarray` items must have the same type.
 
 ## Usage
 
-This library is aimed to be used as module,
-see [bigarray.test.jsligo](./test/bigarray.test.jsligo) for usage.
+This library is aimed to be used as module and can be consumed as a package from LIGO registry.
+While we recommend you consult the [documentation](https://ligolang.org/docs/advanced/package-management/), here's a quick tutorial.
+
+
+1. `ligo install`
+Create an empty `package.json` (just `{}`), and run,
+
+```sh
+ligo install bigarray-jsligo
+```
+
+to install the package.
+
+2. Import the package modules with relative paths. Example: `# import "bigarray-cameligo/lib/bigarray.mligo`
+
+
+```jsligo
+#import "bigarray-jsligo/lib/bigarray.jsligo" "Bigarray"
+const test_fill = (() => {
+  assert(Bigarray.fill(4, 10) == list([10,10,10,10]));
+  assert(Bigarray.fill(4, "foo") == list(["foo","foo","foo","foo"]));
+})();
+```
 
 ## Dev
 
