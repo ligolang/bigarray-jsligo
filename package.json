@@ -1,0 +1,27 @@
+{
+  "name": "bigarray-jsligo",
+  "version": "0.1.0-dev.1",
+  "description": "A LIGO library with a neat abstraction over list",
+  "main": "lib/bigarray.jsligo",
+  "author": "LIGO developers",
+  "repository": "https://github.com/ligolang/bigarray-jsligo",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ligolang/bigarray-jsligo.git"
+  },
+  "keywords": [
+    "ligo",
+    "tezos",
+    "tezos-ligo",
+    "cameligo"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ligolang/bigarray-jsligo/issues"
+  },
+  "homepage": "https://ligolang.org/"
+}
