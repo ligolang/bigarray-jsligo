@@ -1,0 +1,33 @@
+{
+  "checksum": "16fbdf89d219628535ab9bd6d8c49299",
+  "root": "examples@link-dev:./package.json",
+  "node": {
+    "examples@link-dev:./package.json": {
+      "id": "examples@link-dev:./package.json",
+      "name": "examples",
+      "version": "link-dev:./package.json",
+      "source": {
+        "type": "link-dev",
+        "path": ".",
+        "manifest": "package.json"
+      },
+      "overrides": [],
+      "dependencies": [ "bigarray-jsligo@0.1.0-dev.1@d41d8cd9" ],
+      "devDependencies": []
+    },
+    "bigarray-jsligo@0.1.0-dev.1@d41d8cd9": {
+      "id": "bigarray-jsligo@0.1.0-dev.1@d41d8cd9",
+      "name": "bigarray-jsligo",
+      "version": "0.1.0-dev.1",
+      "source": {
+        "type": "install",
+        "source": [
+          "archive:https://beta.packages.ligolang.org/-/api/bigarray-jsligo/-/bigarray-jsligo-0.1.0-dev.1.tgz#sha1:bd0af9985a4263af04e136c9906870e25f0e39b3"
+        ]
+      },
+      "overrides": [],
+      "dependencies": [],
+      "devDependencies": []
+    }
+  }
+}

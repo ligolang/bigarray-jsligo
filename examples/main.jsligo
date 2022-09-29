@@ -1,0 +1,6 @@
+#import "bigarray-jsligo/lib/bigarray.jsligo" "Bigarray"
+
+const test_fill = (() => {
+  assert(Bigarray.fill(4, 10) == list([10,10,10,10]));
+  assert(Bigarray.fill(4, "foo") == list(["foo","foo","foo","foo"]));
+})();

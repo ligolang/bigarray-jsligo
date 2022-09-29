@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "test": "ligo run test ./main.jsligo"
+  },
+  "dependencies": {
+    "bigarray-jsligo": "*"
+  }
+}
