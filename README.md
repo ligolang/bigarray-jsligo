@@ -32,7 +32,48 @@ const test_fill = (() => {
 })();
 ```
 
-## Dev
+## API Reference
+### `.fill`
+`Bigarray.fill(n, initial_value);` creates a list of `n` values initialised to `initial_value`
+
+### `.last_exn`
+`Bigarray.last_exn(aBigarray);` finds the last element in `aBigarray`. Throws an exception if an empty `Bigarray` was provided.
+
+### `.reverse`
+`Bigarray.reverse(aBigarray);` Reverses `aBigarray`
+
+### `.concat`
+`Bigarray.concat(a1, a2);` concatenates two bigarrays, `a1` and `a2`.
+
+### `.get_exn`
+`Bigarray.get_exn(a, n);` gets nth element (starting at 0). Throws an exception if it's an empty bigarray.
+
+### `.set_exn`
+`Bigarray.set_env(xs, n, x);` sets `x` at the `n`th place in bigarray `xs`. Throws, if `n` is not within `bigarray`.
+
+### `.insert_exn`
+`Bigarray.insert_exn(xs, n, x);` inserts `x` in the `n`th position in bigarray `xs`. Throws, if index `n` is not within `bigarray`.
+
+### `.remove_exn`
+`Bigarray.remove_exn(xs, n);` removes `n`th element from bigarray, `xs`.
+
+### `.drop_exn`
+`Bigarray.drop_exn(xs, n);` drops the first `n` elements in bigarray `xs`. Throws if `n` is outside bounds of bigarray,`xs`.
+
+### `.take`
+`Bigarray.take(xs, n);` returns first `n`elements of bigarray, `xs`.
+
+### `.slice`
+`Bigarray.slice(xs, start, no_elements);` returns `no_elements` starting from `start` index in bigarray `xs`
+
+### `.split`
+`Bigarray.split(xs, n);` returns a tuple of two bigarray, split at `n`th index.
+
+### `.rotate`
+`Bigarray.rotate(xs, n);` rotates a bigarray, `xs`, `n` times. A rotation can be defined as taking the first element of the bigarray and appending it at the end.
+
+
+## Development
 
 Just run `make` or `make test` to run the tests
 
