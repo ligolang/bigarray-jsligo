@@ -1,13 +1,13 @@
-const fill : <T>((n: int, x: T) => list<T>) = (n: int, x: T) => {
+const fill = <T>(n: int, x: T): list<T> => {
   const aux = (n: int, acc: list<T>) : list<T> => {
     if (n == 0) { return acc };
     return aux(n - 1, list([x, ...acc]));
   };
 
-  aux(n, list([]) as list<T>);
+  return aux(n, list([]) as list<T>);
 };
 
-const last_exn : <T>((xs: list<T>) => T) = xs =>
+const last_exn = <T>(xs: list<T>): T =>
   match(xs, list([
     ([]: list<T>) => failwith("Empty list"),
     ([hd, ...tl]: list<T>) => {
@@ -18,17 +18,17 @@ const last_exn : <T>((xs: list<T>) => T) = xs =>
     }
   ]));
 
-const reverse : <T>((xs: list<T>) => list<T>) = xs => {
-  const f = (ys: list<T>, x: T) : list<T> => list([x, ...ys]);
+const reverse = <T>(xs: list<T>): list<T> => {
+  const f = ([ys, x]: [list<T>, T]) : list<T> => list([x, ...ys]);
   return List.fold_left(f, list([]) as list<T>, xs)
 };
 
-const concat : <T>((xs: list<T>, ys: list<T>) => list<T>) = (xs: list<T>, ys: list<T>) => {
-  const f = (x: T, ys: list<T>) : list<T> => list([x, ...ys]);
+const concat = <T>(xs: list<T>, ys: list<T>): list<T> => {
+  const f = ([x, ys]: [T, list<T>]) : list<T> => list([x, ...ys]);
   return List.fold_right(f, xs, ys);
 };
 
-const get_exn : <T>((xs : list<T>, n : int) => T) = (xs: list<T>, n: int) => {
+const get_exn = <T>(xs: list<T>, n: int): T => {
   const aux = (remaining: list<T>, cur: int) : T =>
     match(remaining, list([
       ([]: list<T>) => failwith("Not found in list"),
@@ -40,10 +40,10 @@ const get_exn : <T>((xs : list<T>, n : int) => T) = (xs: list<T>, n: int) => {
       }
     ]));
 
-  aux(xs, 0);
+  return aux(xs, 0);
 };
 
-const set_exn : <T>((xs : list<T>, n : int, x: T) => list<T>) = (xs: list<T>, n: int, x: T) => {
+const set_exn = <T>(xs: list<T>, n: int, x: T): list<T> => {
   const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> =>
     match(xs, list([
       ([]: list<T>) => failwith("Not found in list"),
@@ -56,10 +56,10 @@ const set_exn : <T>((xs : list<T>, n : int, x: T) => list<T>) = (xs: list<T>, n:
       }
     ]));
 
-  aux(xs, n, list([]) as list<T>);
+  return aux(xs, n, list([]) as list<T>);
 };
 
-const insert_exn : <T>((xs : list<T>, n : int, x: T) => list<T>) = (xs: list<T>, n: int, x: T) => {
+const insert_exn = <T>(xs: list<T>, n: int, x: T): list<T> => {
   const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> =>
     match(xs, list([
       ([]: list<T>) => failwith("Not found in list"),
@@ -69,14 +69,14 @@ const insert_exn : <T>((xs : list<T>, n : int, x: T) => list<T>) = (xs: list<T>,
           return concat(ys, xs);
         };
 
-        aux(tl, n - 1, list([hd, ...acc]));
+        return aux(tl, n - 1, list([hd, ...acc]));
       }
     ]));
 
-  aux(xs, n, list([]) as list<T>);
+  return aux(xs, n, list([]) as list<T>);
 };
 
-const remove_exn : <T>((xs : list<T>, n : int) => list<T>) = (xs: list<T>, n: int) => {
+const remove_exn = <T>(xs: list<T>, n: int): list<T> => {
   const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> =>
     match(xs, list([
       ([]: list<T>) => failwith("Not found in list"),
@@ -86,14 +86,14 @@ const remove_exn : <T>((xs : list<T>, n : int) => list<T>) = (xs: list<T>, n: in
           return concat(ys, tl);
         };
 
-        aux(tl, n - 1, list([hd, ...acc]));
+        return aux(tl, n - 1, list([hd, ...acc]));
       }
     ]));
 
-  aux(xs, n, list([]) as list<T>);
+  return aux(xs, n, list([]) as list<T>);
 };
 
-const drop_exn : <T>((xs : list<T>, n: int) => list<T>) = (xs: list<T>, n: int) =>
+const drop_exn = <T>(xs: list<T>, n: int): list<T> =>
   match(xs, list([
     ([]: list<T>) => failwith("Not found in list"),
     ([_, ...tl]: list<T>) => {
@@ -101,33 +101,33 @@ const drop_exn : <T>((xs : list<T>, n: int) => list<T>) = (xs: list<T>, n: int) 
         return xs;
       };
 
-      drop_exn(tl, (n - 1));
+      return drop_exn(tl, (n - 1));
     }
   ]));
 
-const take : <T>((xs : list<T>, n: int) => list<T>) = (xs: list<T>, n: int) =>
+const take = <T>(xs: list<T>, n: int): list<T> =>
 {
   const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> => {
     if (n == 0) { return reverse(acc); };
 
-    match(xs, list([
+    return match(xs, list([
       ([]: list<T>) => reverse(acc),
       ([hd, ...tl]: list<T>) => aux(tl, n - 1, list([hd, ...acc]))
     ]));
   };
 
-  aux(xs, n, list([]) as list<T>);
+  return aux(xs, n, list([]) as list<T>);
 };
 
-const slice : <T>((xs : list<T>, start: int, range: int) => list<T>) =
-  (xs: list<T>, start: int, range: int) =>
+const slice =
+  <T>(xs: list<T>, start: int, range: int): list<T> =>
     take(drop_exn(xs, start), range)
 
-const split : <T>((xs : list<T>, n: int) => [list<T>, list<T>]) =
-  (xs: list<T>, n: int) =>
+const split =
+  <T>(xs: list<T>, n: int): [list<T>, list<T>] =>
     [take(xs, n), drop_exn(xs, n)]
 
-const rotate : <T>((xs : list<T>, n: int) => list<T>) = (xs: list<T>, n: int) =>
+const rotate = <T>(xs: list<T>, n: int): list<T> =>
 {
   const aux = (xs: list<T>, n: int, acc: list<T>) : list<T> => {
     if (n == 0) {
@@ -135,11 +135,11 @@ const rotate : <T>((xs : list<T>, n: int) => list<T>) = (xs: list<T>, n: int) =>
       return concat(xs, ys);
     };
 
-    match(xs, list([
+    return match(xs, list([
       ([]: list<T>) => reverse(acc),
       ([hd, ...tl]: list<T>) => aux(tl, n - 1, list([hd, ...acc]))
     ]));
   };
 
-  aux(xs, n, list([]) as list<T>);
+  return aux(xs, n, list([]) as list<T>);
 };
